@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guess Thr Number</title>
+</head>
+<body>
+	<center>
+	<h1>Number guessing game</h1>
+	<p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.</p>
+	Enter a guess : <input type="text" id="guess"><button id="btn" onclick="funtoosh()">Submit guess</button>
+	<div>
+		<p id="a"></p>
+		<p id="b"></p>
+		<p id="c"></p>
+		<p id="d"></p>
+	</div>
+	</center>
+
+	<script type="text/javascript">
+		var randomnumber = Math.floor(Math.random() * 100) + 1;
+		console.log(randomnumber);
+ 		var no_of_guess=10;
+ 		var a= new Array();
+ 		var resetButton;
+
+		function funtoosh()
+		{
+		
+				var input1=Number(document.getElementById("guess").value);
+				a.push(input1);
+				console.log(input1);
+				console.log(a);	
+				var i=0;
+			
+				if (input1 == randomnumber) {
+					document.getElementById("a").innerHTML="Previous Guesses:"+a;
+					document.getElementById("b").style.backgroundColor="green";
+					document.getElementById("b").style.color="white";
+					document.getElementById("b").innerHTML="CORRECT";
+					document.getElementById("guess").value="";
+					dis();
+					console.log(no_of_guess);
+					i++;
+					}				
+				 if (input1 > randomnumber) {
+					document.getElementById("a").innerHTML="Previous Guesses:"+a;
+					document.getElementById("b").style.backgroundColor="red";
+					document.getElementById("b").style.color="white";
+					document.getElementById("b").innerHTML="WRONG";
+					document.getElementById("c").innerHTML="too big";
+					document.getElementById("guess").value="";
+					no_of_guess--;
+					if (no_of_guess == 0) {
+						dis();
+					}
+					
+					console.log(no_of_guess);
+					i++;
+					
+				}
+				if(input1 < randomnumber){
+					document.getElementById("a").innerHTML="Previous Guesses:"+a;
+					document.getElementById("b").style.backgroundColor="red";
+					document.getElementById("b").style.color="white";
+					document.getElementById("b").innerHTML="WRONG";
+					document.getElementById("c").innerHTML="too small";
+					document.getElementById("guess").value="";
+					no_of_guess--;
+					if (no_of_guess == 0) {
+						dis();
+					}
+					
+					console.log(no_of_guess);
+					i++;
+				}
+		}
+		function dis()
+		{
+			document.getElementById("guess").disabled=true;	
+			document.getElementById("btn").disabled=true;
+			document.getElementById("d").innerHTML="game is over";
+	 		resetButton = document.createElement('button');
+   		 	resetButton.textContent = 'Start new game';
+    		document.body.appendChild(resetButton);
+    	 	resetButton.addEventListener('click', resetgame);	
+		}
+
+		function resetgame(){
+			document.getElementById("guess").disabled=false;	
+			document.getElementById("btn").disabled=false;
+			resetButton.parentNode.removeChild(resetButton);
+			a=new Array();
+			 no_of_guess=10;
+			document.getElementById("a").innerHTML="";
+			document.getElementById("b").style.backgroundColor="white";
+			document.getElementById("b").innerHTML="";
+			document.getElementById("c").innerHTML="";
+			document.getElementById("d").innerHTML="";
+			randomnumber = Math.floor(Math.random() * 100) + 1;
+			console.log(randomnumber);
+
+		}
+
+	</script>
+
+</body>
+</html>
